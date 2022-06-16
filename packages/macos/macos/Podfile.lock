@@ -16,7 +16,7 @@ PODS:
   - Flipper-Boost-iOSX (1.76.0.1.11)
   - Flipper-DoubleConversion (1.1.7)
   - Flipper-Fmt (7.1.7)
-  - Flipper-Folly (2.6.9):
+  - Flipper-Folly (2.6.10):
     - Flipper-Boost-iOSX
     - Flipper-DoubleConversion
     - Flipper-Fmt (= 7.1.7)
@@ -237,6 +237,12 @@ PODS:
     - React-cxxreact (= 0.63.38)
     - React-jsi (= 0.63.38)
   - React-jsinspector (0.63.38)
+  - react-native-safe-area-context (4.3.1):
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - ReactCommon/turbomodule/core
   - React-RCTActionSheet (0.63.38):
     - React-Core/RCTActionSheetHeaders (= 0.63.38)
   - React-RCTAnimation (0.63.38):
@@ -299,6 +305,9 @@ PODS:
     - React-jsi (= 0.63.38)
   - RNCAsyncStorage (1.15.8):
     - React-Core
+  - RNScreens (3.13.1):
+    - React-Core
+    - React-RCTImage
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -341,6 +350,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native-macos/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native-macos/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native-macos/ReactCommon/jsinspector`)
+  - react-native-safe-area-context (from `../../../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native-macos/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native-macos/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native-macos/Libraries/Blob`)
@@ -352,6 +362,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native-macos/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native-macos/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNScreens (from `../../../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native-macos/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -403,6 +414,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-macos/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native-macos/ReactCommon/jsinspector"
+  react-native-safe-area-context:
+    :path: "../../../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
     :path: "../node_modules/react-native-macos/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -425,6 +438,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-macos/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNScreens:
+    :path: "../../../node_modules/react-native-screens"
   Yoga:
     :path: "../node_modules/react-native-macos/ReactCommon/yoga"
 
@@ -438,7 +453,7 @@ SPEC CHECKSUMS:
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Fmt: 60cbdd92fc254826e61d669a5d87ef7015396a9b
-  Flipper-Folly: 4c7cf530a9038ae25b0fa37e00b00491c467aaea
+  Flipper-Folly: 584845625005ff068a6ebf41f857f468decd26b3
   Flipper-Glog: 1dfd6abf1e922806c52ceb8701a3599a79a200a6
   Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
   Flipper-RSocket: d9d9ade67cbecf6ac10730304bf5607266dd2541
@@ -457,6 +472,7 @@ SPEC CHECKSUMS:
   React-jsi: 44fbe6321b975bcf197bd2e755bf4bbfcdefc71c
   React-jsiexecutor: fdc300cddea55c8c4cdd35ef7a4ca79d901a008f
   React-jsinspector: fcd5f97a8417f35190dddef8320eca519bcb99d2
+  react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   React-RCTActionSheet: cb548b3e6e2469a7a2e35d415a6c202e426d3382
   React-RCTAnimation: 526a79643ef10d3c8682572f10da9e3c37f2bd11
   React-RCTBlob: cd713a51bc0050e2dcac184be7aa3de73712ac46
@@ -468,9 +484,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: ab72db1b238f49246d7b7663ce8fa4d57bc29c5b
   ReactCommon: 8164c9d3cd8c956f2fc432b667e964e38ba8e16c
   RNCAsyncStorage: e8b8d6320a0dd90eb610fb0d0b1ef90596697c69
+  RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   Yoga: a68ce967f49a478e85b0642fd33aee46187ab6f8
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 9fa2e65bdcf48e59da0104b3b2f4880f6b768bb2
+PODFILE CHECKSUM: 96019904900640e5fd266b59bb1b766ae6223b6c
 
 COCOAPODS: 1.11.2

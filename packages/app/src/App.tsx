@@ -16,6 +16,7 @@ import LogoSrc from "./logo.png";
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { createStackNavigator } from "@react-navigation/stack";
 
 
 type RootStackParamList = {
@@ -40,7 +41,7 @@ type AsyncScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 function HomeScreen() {
-  const navigation = useNavigation <DetailScreenNavigationProp>();
+  const navigation = useNavigation<DetailScreenNavigationProp>();
 
   return (
     <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -72,12 +73,17 @@ function DetailsScreen() {
   );
 }
 
-const RootStack = createNativeStackNavigator<RootStackParamList>();
+const platformValue = subplatform
+  ? `${Platform.OS} (${subplatform})`
+  : Platform.OS;
+
+console.log('platformValue', platformValue);
+
+const RootStack = platformValue === 'web' || platformValue === 'macos' ?
+  createStackNavigator<RootStackParamList>() :
+  createNativeStackNavigator<RootStackParamList>();
 
 export function App(): JSX.Element {
-  const platformValue = subplatform
-    ? `${Platform.OS} (${subplatform})`
-    : Platform.OS;
   return (
     <SafeAreaProvider>
       <NavigationContainer>
