@@ -45,11 +45,12 @@ function HomeScreen() {
 
   return (
     <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text style={{color: '#ffcc00'}}>Home Screen</Text>
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
+      <View style={{backgroundColor: '#ffcc66', height:32, width:'100%'}}></View>
       <Button
         title="Go to Async"
         onPress={() => navigation.navigate('Async')}
@@ -79,7 +80,7 @@ const platformValue = subplatform
 
 console.log('platformValue', platformValue);
 
-const RootStack = platformValue === 'web' || platformValue === 'macos' ?
+const RootStack = platformValue === 'macos' ?
   createStackNavigator<RootStackParamList>() :
   createNativeStackNavigator<RootStackParamList>();
 
