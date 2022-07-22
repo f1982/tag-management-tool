@@ -40,9 +40,10 @@ jobs:
       - name: Make Gradlew Executable
         run: cd packages/mobile/android && chmod +x ./gradlew
 
+      # cd packages/mobile/android && ./gradlew bundleRelease --no-daemon
       - name: Build Android App Bundle
         run: |
-          cd packages/mobile/android && ./gradlew bundleRelease --no-daemon
+          cd packages/mobile/android && ./gradlew assembleRelease
 
       # - name: Sign App Bundle
       #   id: sign_app
