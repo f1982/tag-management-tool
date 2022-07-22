@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Build APK
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Tests
+    name: Building
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -54,8 +54,14 @@ jobs:
       #     keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
       #     keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
 
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: Signed App Bundle
+      #     path: ${{steps.sign_app.outputs.signedReleaseFile}}
+      
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
-          name: Signed App Bundle
-          path: ${{steps.sign_app.outputs.signedReleaseFile}}
+          name: Unsigned App Bundle
+          path: packages/mobile/android/app/build/outputs/apk/release/app-release.apk
