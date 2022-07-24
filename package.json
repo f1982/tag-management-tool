@@ -54,7 +54,7 @@
     "lint:fix": "ultra -r lint:fix",
     "test": "ultra -r test",
     "typecheck": "ultra -r typecheck",
-    "postversion": "yarn workspace @my-app/mobile postversion"
+    "postversion": "syncpack list-mismatches && yarn workspace @my-app/mobile postversion"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.3",
@@ -64,10 +64,9 @@
     "eslint-plugin-react-app": "^6.2.2",
     "eslint-plugin-react-native": "^3.11.0",
     "prettier": "^2.3.2",
+    "syncpack": "^8.2.4",
     "typescript": "^4.4.2",
-    "ultra-runner": "^3.10.5"
-  },
-  "dependencies": {
+    "ultra-runner": "^3.10.5",
     "np": "^7.6.2"
   }
 }
