@@ -1,6 +1,6 @@
 {
   "name": "tag-management-tool",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "repository": {
     "type": "git",
@@ -63,10 +63,10 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react-app": "^6.2.2",
     "eslint-plugin-react-native": "^3.11.0",
+    "np": "^7.6.2",
     "prettier": "^2.3.2",
     "syncpack": "^8.2.4",
     "typescript": "^4.4.2",
-    "ultra-runner": "^3.10.5",
-    "np": "^7.6.2"
+    "ultra-runner": "^3.10.5"
   }
 }
