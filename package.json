@@ -39,6 +39,7 @@
     "macos:start": "yarn workspace @my-app/macos macos",
     "macos:xcode": "yarn workspace @my-app/macos xcode",
     "macos:pods": "yarn workspace @my-app/macos pods",
+    "web:version": "yarn workspace @my-app/web version --new-version $npm_package_version --no-git-tag-version",
     "web:start": "yarn workspace @my-app/web start",
     "web:build": "yarn workspace @my-app/web build",
     "next:start": "yarn workspace @my-app/next dev",
@@ -56,7 +57,7 @@
     "lint:fix": "ultra -r lint:fix",
     "test": "ultra -r test",
     "typecheck": "ultra -r typecheck",
-    "postversion": "yarn workspace @my-app/mobile postversion"
+    "postversion": "yarn mobile:version && yarn web:version && yarn macos:version"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.3",
