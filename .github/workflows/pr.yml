@@ -23,7 +23,39 @@ jobs:
       - name: Run test
         run: |
           yarn test
-        
+      
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Cache Gradle Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+      - name: Make Gradlew Executable
+        run: cd packages/mobile/android && chmod +x ./gradlew
+
+      - name: Build Android App Bundle
+        run: |
+          cd packages/mobile/android && ./gradlew assembleRelease --no-daemon
+
+      # To add new GitHub Action secrets, open your Github project home page 
+      # Project Setting > Secrets > Actions > new repository secret
+      - name: Sign App APK
+        id: sign_apk
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: packages/mobile/android/app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+
       - name: Build Changelog
         id: changelog
         uses: ardalanamini/auto-changelog@v2
@@ -47,5 +79,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{steps.sign_apk.outputs.signedReleaseFile}}
-          asset_name: app-release-signed-${{ steps.var.outputs.tag }}.apk
+          asset_name: app-release-signed.apk
           asset_content_type: application/zip
