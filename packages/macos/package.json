@@ -1,6 +1,6 @@
 {
   "name": "@my-app/macos",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "scripts": {
     "macos": "react-native run-macos",

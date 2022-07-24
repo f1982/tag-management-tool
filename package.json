@@ -1,6 +1,6 @@
 {
   "name": "tag-management-tool",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "scripts": {
     "np": "np --no-publish --any-branch",
     "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf yarn.lock",
+    "mobile:version": "yarn workspace @my-app/mobile version --new-version $npm_package_version --no-git-tag-version",
     "android:metro": "yarn workspace @my-app/mobile start",
     "android:start": "yarn workspace @my-app/mobile android",
     "android:studio": "yarn workspace @my-app/mobile studio",
@@ -33,6 +34,7 @@
     "ios:start": "yarn workspace @my-app/mobile ios",
     "ios:xcode": "yarn workspace @my-app/mobile xcode",
     "ios:pods": "yarn workspace @my-app/mobile pods",
+    "macos:version": "yarn workspace @my-app/macos version --new-version $npm_package_version --no-git-tag-version",
     "macos:metro": "yarn workspace @my-app/macos start",
     "macos:start": "yarn workspace @my-app/macos macos",
     "macos:xcode": "yarn workspace @my-app/macos xcode",
@@ -54,7 +56,6 @@
     "lint:fix": "ultra -r lint:fix",
     "test": "ultra -r test",
     "typecheck": "ultra -r typecheck",
-    "version:all": "yarn workspace @my-app/mobile version --new-version $npm_package_version",
     "postversion": "yarn workspace @my-app/mobile postversion"
   },
   "devDependencies": {
@@ -66,7 +67,6 @@
     "eslint-plugin-react-native": "^3.11.0",
     "np": "^7.6.2",
     "prettier": "^2.3.2",
-    "syncpack": "^8.2.4",
     "typescript": "^4.4.2",
     "ultra-runner": "^3.10.5"
   }
