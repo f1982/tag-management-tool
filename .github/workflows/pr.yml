@@ -23,3 +23,29 @@ jobs:
       - name: Run test
         run: |
           yarn test
+        
+      - name: Build Changelog
+        id: changelog
+        uses: ardalanamini/auto-changelog@v2
+        with:
+          github-token: ${{ secrets.REPO_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }} &#x20;
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{steps.sign_apk.outputs.signedReleaseFile}}
+          asset_name: app-release-signed-${{ steps.var.outputs.tag }}.apk
+          asset_content_type: application/zip
