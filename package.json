@@ -28,6 +28,7 @@
     "android:metro": "yarn workspace @my-app/mobile start",
     "android:start": "yarn workspace @my-app/mobile android",
     "android:studio": "yarn workspace @my-app/mobile studio",
+    "android:apk": "yarn workspace @my-app/mobile android:apk",
     "ios:metro": "yarn workspace @my-app/mobile start",
     "ios:start": "yarn workspace @my-app/mobile ios",
     "ios:xcode": "yarn workspace @my-app/mobile xcode",
@@ -52,7 +53,8 @@
     "lint": "ultra -r lint",
     "lint:fix": "ultra -r lint:fix",
     "test": "ultra -r test",
-    "typecheck": "ultra -r typecheck"
+    "typecheck": "ultra -r typecheck",
+    "postversion": "yarn workspace @my-app/mobile postversion"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.3",
