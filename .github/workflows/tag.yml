@@ -1,0 +1,63 @@
+name: Release tags
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  Build:
+    name: Build/Release APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Get Tag
+        id: var
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      
+      - name: Build Android App APK
+        run: |
+          cd packages/mobile/android && ./gradlew assembleRelease --no-daemon
+
+      # To add new GitHub Action secrets, open your Github project home page 
+      # Project Setting > Secrets > Actions > new repository secret
+      - name: Sign App APK
+        id: sign_apk
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: packages/mobile/android/app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+
+      # Create a personal access token as REPO_TOKEN 
+      - name: Build Changelog
+        id: changelog
+        uses: ardalanamini/auto-changelog@v2
+        with:
+          github-token: ${{ secrets.REPO_TOKEN }}
+
+      # Create a release page with information
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }} &#x20;
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      # Upload generated APK to release page
+      - name: Upload APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{steps.sign_apk.outputs.signedReleaseFile}}
+          asset_name: app-release-signed-${{ steps.var.outputs.tag }}.apk
+          asset_content_type: application/zip
