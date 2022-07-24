@@ -44,7 +44,7 @@ jobs:
         run: |
           cd packages/mobile/android && ./gradlew assembleRelease --no-daemon
 
-      # To add new GitHub Action secrets, open your Github project home page 
+      # To add new GitHub Action secrets, open your Github project home page
       # Project Setting > Secrets > Actions > new repository secret
       - name: Sign App APK
         id: sign_app
