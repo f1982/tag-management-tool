@@ -2,6 +2,10 @@
   "name": "tag-management-tool",
   "version": "0.0.1",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/f1982/tag-management-tool"
+  },
   "workspaces": {
     "packages": [
       "packages/*"
@@ -19,6 +23,7 @@
     ]
   },
   "scripts": {
+    "np": "np --no-publish --any-branch",
     "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf yarn.lock",
     "android:metro": "yarn workspace @my-app/mobile start",
     "android:start": "yarn workspace @my-app/mobile android",
@@ -59,5 +64,8 @@
     "prettier": "^2.3.2",
     "typescript": "^4.4.2",
     "ultra-runner": "^3.10.5"
+  },
+  "dependencies": {
+    "np": "^7.6.2"
   }
 }
