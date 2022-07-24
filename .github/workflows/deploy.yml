@@ -1,13 +1,13 @@
 name: Build APK
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
       - main
 
 jobs:
-  test:
+  Build:
     name: Building
     runs-on: ubuntu-latest
     steps:
@@ -40,29 +40,25 @@ jobs:
       - name: Make Gradlew Executable
         run: cd packages/mobile/android && chmod +x ./gradlew
 
-      # cd packages/mobile/android && ./gradlew bundleRelease --no-daemon
       - name: Build Android App Bundle
         run: |
-          cd packages/mobile/android && ./gradlew assembleRelease
+          cd packages/mobile/android && ./gradlew assembleRelease --no-daemon
 
-      # - name: Sign App Bundle
-      #   id: sign_app
-      #   uses: r0adkll/sign-android-release@v1
-      #   with:
-      #     releaseDirectory: packages/mobile/android/app/build/outputs/bundle/release
-      #     signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
-      #     alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
-      #     keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
-      #     keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
+      # To add new GitHub Action secrets, open your Github project home page 
+      # Project Setting > Secrets > Actions > new repository secret
+      - name: Sign App APK
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: packages/mobile/android/app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.ANDROID_SIGNING_KEY }}
+          alias: ${{ secrets.ANDROID_SIGNING_ALIAS }}
+          keyStorePassword: ${{ secrets.ANDROID_SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_PASSWORD }}
 
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: Signed App Bundle
-      #     path: ${{steps.sign_app.outputs.signedReleaseFile}}
-      
-      - name: Upload Artifact
+      # This apk can be downloaded on the action page, not release page
+      - name: Upload Artifact (APK file)
         uses: actions/upload-artifact@v3
         with:
-          name: Unsigned App Bundle # will be the file name
+          name: Signed App Bundle # will be the file name
           path: packages/mobile/android/app/build/outputs/apk/release/app-release.apk

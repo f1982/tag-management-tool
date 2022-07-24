@@ -129,8 +129,8 @@ android {
         applicationId "com.reactnativeuniversalproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 8
+        versionName "0.1.6"
     }
     splits {
         abi {
