@@ -1,13 +1,13 @@
 name: Build APK
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
       - main
 
 jobs:
-  test:
+  Build:
     name: Building
     runs-on: ubuntu-latest
     steps:
