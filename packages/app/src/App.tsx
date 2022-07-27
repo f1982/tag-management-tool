@@ -13,7 +13,7 @@ import { AsyncStorageExample } from "./AsyncStorageExample";
 import { subplatform } from "./config";
 import LogoSrc from "./logo.png";
 
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { LinkingOptions, NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -45,12 +45,12 @@ function HomeScreen() {
 
   return (
     <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{color: '#ffcc00'}}>Home Screen</Text>
+      <Text style={{ color: '#ffcc00' }}>Home Screen</Text>
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Details')}
       />
-      <View style={{backgroundColor: '#ffcc66', height:32, width:'100%'}}></View>
+      <View style={{ backgroundColor: '#ffcc66', height: 32, width: '100%' }}></View>
       <Button
         title="Go to Async"
         onPress={() => navigation.navigate('Async')}
@@ -62,10 +62,14 @@ function HomeScreen() {
 
 function DetailsScreen() {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const { name, params } = useRoute();
 
   return (
     <SafeAreaView style={{ alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
+      <Text>Route name: {name}</Text>
+      <Text>Route params: {params}</Text>
+
       <Button
         title="Go Home"
         onPress={() => navigation.navigate('Home')}
@@ -84,10 +88,22 @@ const RootStack = platformValue === 'macos' ?
   createStackNavigator<RootStackParamList>() :
   createNativeStackNavigator<RootStackParamList>();
 
+
+const linking: LinkingOptions<RootStackParamList> = {
+  prefixes: ['tt'],
+  config: {
+    screens: {
+      Home: "",
+      Details: "details",
+      Async: "async",
+    }
+  }
+};
+
 export function App(): JSX.Element {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         <RootStack.Navigator>
           <RootStack.Screen name="Home" component={HomeScreen} />
           <RootStack.Screen name="Details" component={DetailsScreen} />
